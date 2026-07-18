@@ -1,0 +1,82 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* Titulo */
+header{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    background-color: brown;
+}
+main{
+    background-color: yellowgreen;
+}
+/* Panel de Carga*/
+.panel{
+    background-color: aqua;
+    width: 70%;
+    padding: 2rem 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;    
+    justify-content: center;
+    border-bottom: 1px solid black;
+}
+.panel .add-item ,.edit-item{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel form .articulo{
+    background-color: aquamarine;
+    padding: .2rem 0;
+}
+.panel form .botones{
+    display: flex;
+    padding: .2rem 0;
+    justify-content: space-around;
+    background-color: beige;
+}
+.panel form .botones input{
+    padding: .3rem 1rem;
+}
+/* Estado del Depostio */
+.deposito{
+    background-color: cadetblue;
+    width: 70%;
+    padding: 2rem 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+.deposito .buscador{
+    background-color: violet;
+    display: flex;
+    justify-content: center;
+}
+.deposito .tabla{
+    background-color: tomato;
+}
+.deposito .tabla .titulos{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    align-items: center; 
+    text-align: center; 
+    padding: .3rem 0;
+    width: 100%;
+}
+.fila-producto{
+    border-top: 1px solid black;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    align-items: center; 
+    text-align: center; 
+    width: 100%;
+}
