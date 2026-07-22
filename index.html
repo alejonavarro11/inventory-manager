@@ -67,17 +67,23 @@
                 <input type="search" name="buscador" id="search-bar">
             </div>
             <div class="tabla">
-                <div class="titulos">
-                    <h4 class="titulo-tabla">CÓDIGO</h4>
-                    <h4 class="titulo-tabla">DESCRIPCIÓN DEL PRODUCTO</h4>
-                    <h4 class="titulo-tabla">STOCK</h4>
-                    <h4 class="titulo-tabla">ESTADO</h4>
-                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>CÓDIGO</th>
+                            <th>DESCRIPCIÓN</th>
+                            <th>STOCK</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventario-body">
+                        
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
     <footer>
-        <input type="button" value="">
+    
     </footer>
     <script src="js/script.js"></script>
 </body>

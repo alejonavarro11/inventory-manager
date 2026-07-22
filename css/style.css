@@ -61,22 +61,11 @@ main{
     display: flex;
     justify-content: center;
 }
-.deposito .tabla{
+.deposito .tabla table {
     background-color: tomato;
-}
-.deposito .tabla .titulos{
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr 1fr;
-    align-items: center; 
-    text-align: center; 
-    padding: .3rem 0;
     width: 100%;
 }
-.fila-producto{
-    border-top: 1px solid black;
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr 1fr;
-    align-items: center; 
-    text-align: center; 
-    width: 100%;
+.deposito .tabla table tbody{
+    text-align: center;
+    align-items: center;
 }
