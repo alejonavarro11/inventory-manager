@@ -26,17 +26,26 @@ function renderizarInventario(){
         const celdaCodigo = document.createElement("td");
         const celdaDescripcion = document.createElement("td");
         const celdaCantidad = document.createElement("td");
-        
+        const celdaAcciones = document.createElement("td");
+        const borrarIcono = document.createElement("img");
         
         opcion.textContent = producto.codigo;
         celdaCodigo.textContent = producto.codigo;
         celdaDescripcion.textContent = producto.descripcion;
         celdaCantidad.textContent = producto.cantidad;
+        borrarIcono.src = `assets/delete.png`;
+        
+        // EVENTO PARA BORRAR EL PRODUCTO AL HACER CLICK SOBRE EL ICONO DE ELIMINAR 
+        borrarIcono.addEventListener("click", ()=>{
+            eliminarProducto(producto);
+        });
         
         selectorDeProductos.appendChild(opcion);
+        celdaAcciones.appendChild(borrarIcono);
         fila.appendChild(celdaCodigo);
         fila.appendChild(celdaDescripcion);
         fila.appendChild(celdaCantidad);
+        fila.appendChild(celdaAcciones);
         sectorInventario.appendChild(fila);
     }
 }
@@ -96,6 +105,18 @@ function cargarInventario(){
     }
     renderizarInventario();
 }
+    // FUNCIÓN PARA ELIMINAR UN PRODUCTO EL INVENTARIO
+function eliminarProducto(producto){
+    const indice = inventario.findIndex(item => item.codigo === producto.codigo);
+    if (indice === -1){
+        return;
+    }
+    if (confirm(`Esta seguro de eliminar el producto ${producto.codigo}?`)){
+        inventario.splice(indice, 1);
+        guardarInventario();
+        renderizarInventario();
+    }
+}
 
 // EVENTOS
     // BOTON PARA AÑADIR PRODUCTOS AL INVENTARIO
@@ -153,5 +174,6 @@ btnAñadirStock.addEventListener("click", ()=>{
 btnRemoverStock.addEventListener("click", ()=>{
     modificarStock("remover")
 });
+
 
 cargarInventario();

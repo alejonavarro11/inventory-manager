@@ -1,9 +1,10 @@
 *,
 *::before,
 *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: serif;
 }
 /* Titulo */
 header{
@@ -66,6 +67,25 @@ main{
     width: 100%;
 }
 .deposito .tabla table tbody{
+    background-color: crimson;
     text-align: center;
     align-items: center;
+}
+#inventario-body tr img:hover{
+    cursor: pointer;
+}
+.tabla tr th img{
+    visibility: hidden;
+}
+.tabla tr th:nth-child(1){
+    width: 25%;
+}
+.tabla tr th:nth-child(2){
+    width: 45%; 
+}
+.tabla tr th:nth-child(3){
+    width: 20%;
+}
+.tabla tr th:nth-child(4){
+     width: 10%; 
 }
