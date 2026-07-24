@@ -7,6 +7,7 @@ const cajaCantidadInicial = document.getElementById("cantidad-inicial");
 const btnAñadirProducto = document.getElementById("add");
     // TABLA PARA MOSTRAR EL INVENTARIO EN PANTALLA
 const sectorInventario = document.getElementById("inventario-body");
+const barraDeBusqueda = document.getElementById("search-bar");
     // PANEL DE EDICIÓN DE PRODUCTOS
 const selectorDeProductos = document.getElementById("selector");
 const cajaCantidadAEditar = document.getElementById("amount");
@@ -15,13 +16,10 @@ const btnRemoverStock = document.getElementById("remove-amount");
 
 // FUNCIONES
     // FUNCIÓN PARA ACTUALIZAR E IMPRIMIR NUESTRO INVENTARIO EN PANTALLA
-function renderizarInventario(){
+function renderizarInventario(listaARenderizar = inventario){
     sectorInventario.innerHTML = "";
-    selectorDeProductos.innerHTML = `<option value="">Elija una opción...</option>`;
     
-    for (const producto of inventario){
-        const opcion = document.createElement("option");
-        
+    for (const producto of listaARenderizar){
         const fila = document.createElement("tr");
         const celdaCodigo = document.createElement("td");
         const celdaDescripcion = document.createElement("td");
@@ -29,7 +27,6 @@ function renderizarInventario(){
         const celdaAcciones = document.createElement("td");
         const borrarIcono = document.createElement("img");
         
-        opcion.textContent = producto.codigo;
         celdaCodigo.textContent = producto.codigo;
         celdaDescripcion.textContent = producto.descripcion;
         celdaCantidad.textContent = producto.cantidad;
@@ -40,7 +37,6 @@ function renderizarInventario(){
             eliminarProducto(producto);
         });
         
-        selectorDeProductos.appendChild(opcion);
         celdaAcciones.appendChild(borrarIcono);
         fila.appendChild(celdaCodigo);
         fila.appendChild(celdaDescripcion);
@@ -48,7 +44,18 @@ function renderizarInventario(){
         fila.appendChild(celdaAcciones);
         sectorInventario.appendChild(fila);
     }
-}
+};
+    // FUNCIÓN PARA ACTUALIZAR Y RENDERIZAR NUESTRO SELECTOR DE PRODUCTOS EN EL PANEL DE EDICION
+function renderizarSelector(){
+    selectorDeProductos.innerHTML = `<option value="">Elija una opción...</option>`;
+
+    for (const producto of inventario){
+        const opcion = document.createElement("option");
+
+        opcion.textContent = producto.codigo;
+        selectorDeProductos.appendChild(opcion)
+    }
+};
     // FUNCION PARA MODIFICAR STOCK DE UN PRODUCTO EN ESPECIFICO
 function modificarStock(tipo){
     const codigo = selectorDeProductos.value;
@@ -83,6 +90,7 @@ function modificarStock(tipo){
     }
     guardarInventario();
     renderizarInventario();
+    renderizarSelector();
     console.log(inventario);
     cajaCantidadAEditar.value = "";
 };
@@ -104,6 +112,7 @@ function cargarInventario(){
         inventario.push(producto);
     }
     renderizarInventario();
+    renderizarSelector();
 }
     // FUNCIÓN PARA ELIMINAR UN PRODUCTO EL INVENTARIO
 function eliminarProducto(producto){
@@ -115,6 +124,7 @@ function eliminarProducto(producto){
         inventario.splice(indice, 1);
         guardarInventario();
         renderizarInventario();
+        renderizarSelector();
     }
 }
 
@@ -159,6 +169,7 @@ btnAñadirProducto.addEventListener("click", ()=>{
     inventario.push(producto);
     guardarInventario();
     renderizarInventario();
+    renderizarSelector();
 
     cajaCodigo.value = "";
     cajaDescripcion.value = "";
@@ -173,6 +184,17 @@ btnAñadirStock.addEventListener("click", ()=>{
     // BOTON PARA REMOVER STOCK DE UN PRODUCTO EN ESPECIFICO
 btnRemoverStock.addEventListener("click", ()=>{
     modificarStock("remover")
+});
+    // BARRA DE BUSQUEDA PARA FILTRAR OBJETOS
+barraDeBusqueda.addEventListener("input", ()=>{
+    const busqueda = barraDeBusqueda.value.toLowerCase().trim();
+
+    const inventarioAux = inventario.filter(producto =>
+        producto.codigo.toLowerCase().includes(busqueda)
+        ||
+        producto.descripcion.toLowerCase().includes(busqueda));
+    
+    renderizarInventario(inventarioAux);
 });
 
 
